@@ -1,0 +1,4 @@
+export const SET_CURRENT_USER_ID = 'SET_CURRENT_USER_ID'
+export const SET_TASK_CATEGORY = 'SET_TASK_CATEGORY'
+export const SET_TASK_TEXT = 'SET_TASK_TEXT'
+export const UPDATE_TASK = 'UPDATE_TASK'
