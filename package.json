@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1",
-    "semantic-ui": "^2.4.2"
+    "react-scripts": "3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,7 +29,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "gulp": "^4.0.2"
-  }
+  "devDependencies": {}
 }
