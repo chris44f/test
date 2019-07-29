@@ -1,8 +1,8 @@
-import { SET_CURRENT_USER_ID } from '../constants/action-types'
+import { USER_VERIFICATION } from '../constants/action-types'
 
-export default function currentUserId(state = null , action) {
+export default (state = null, action) => {
   switch (action.type) {
-    case SET_CURRENT_USER_ID:
+    case USER_VERIFICATION:
       return action.payload
     default:
       return state

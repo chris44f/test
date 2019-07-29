@@ -1,10 +1,9 @@
 import React from 'react'
 
 function Header({ user }) {
-  const { username } = user
   return (
     <header>
-      <h1>{`Welcome back ${username}`}</h1>
+      <h1>{`Welcome back ${user}`}</h1>
     </header>
   )
 }

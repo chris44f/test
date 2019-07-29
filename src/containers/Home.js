@@ -1,17 +1,16 @@
 import React from 'react'
-import store from './store'
-import Header from './Header'
-import Updates from './Updates'
+import store from '../store'
+import Header from '../components/Header'
+import Updates from '../components/Updates'
 import _ from 'lodash'
 
-const Home = ({ allTasks, currentUserId }) => {
+const Home = ({ currentUserId }) => {
   const state = store.getState()
-  const activeUser = state.loginDetails[currentUserId]
   const userTasks = state.allTasks[currentUserId]
 
   return (
     <div>
-      <Header user={activeUser}/>
+      <Header user={currentUserId}/>
       <Updates userTasks={_.values(userTasks)}></Updates>
     </div>
   )

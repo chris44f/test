@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 import '../App.css';
-import Individual from '../Individual'
-import LoginPage from '../LoginPage'
+import LoginPage from './LoginPage'
 import uuidv from 'uuid/v4'
 import _ from 'lodash'
-import Sidebar from '../components/Sidebar'
-import Home from '../Home'
+import Home from './Home'
 import store from '../store'
 import { setTaskCategory, setTaskText, updateTask } from '../actions'
 
 const Main = () => {
 
   // state = {
-    // textInput: "",
-    // catInput: "",
-    // currentUserId: "user001",
     // categories: ["work1", "work2", "work3"],
     // newTask: {
     //   user: "",
@@ -23,40 +18,7 @@ const Main = () => {
     //   timestamp: "",
     //   key: ""
     // },
-    // allTasks: {
-    //   user001: {
-    //     0: {
-    //       taskText: "first task update",
-    //       taskCategory" "work1",
-    //       taskTimestamp,
-    //       is_user_task: true
-    //     },
-    //     1: {
-    //       taskText: "second task update",
-    //       taskCategory: "work3"
-    //       taskTimestamp,
-    //       is_user_task: true
-    //     }
-    //   },
-    //   user002: {
-    //     0: {
-    //       taskText: "my first update"
-    //       taskCategory: "work 1"
-    //       taskTimestamp,
-    //       is_user_task: true
-    //     }
-    //   } 
-    // },
     // users: [],
-    // userDetails: true,
-  // }
-
-  // updateText = (text) => {
-  //   this.setState({ textInput: text })
-  // }
-
-  // updateCategory = (cat) => {
-  //   this.setState({ catInput: cat })
   // }
 
   // handleNewTask = () => {
@@ -88,11 +50,7 @@ const Main = () => {
   //   }
   // }
 
-  // credentialsVerified = (user) => {
-  //   this.setState({ userDetails: true, currentUser: user })
-  // }
-
-    const { currentUserId, loginDetails, allTasks, taskCategory, taskText } = store.getState()
+    const { currentUserId, allTasks, taskCategory, taskText } = store.getState()
 
     const whatToRender = () => {
       if(currentUserId === "user001" || currentUserId === "user002") {
@@ -112,12 +70,11 @@ const Main = () => {
 
     const handleSubmit = e => {
       e.preventDefault()
-      store.dispatch(updateTask( taskText, currentUserId ))
+      store.dispatch(updateTask( taskText, taskCategory, currentUserId ))
     }
 
     return (
       <div>
-        <Sidebar loginDetails={_.values(loginDetails)} />
         <button onClick={handleSubmit}>Click me</button>
         <input type="text" placeholder="What did you do today?" value={taskText} onChange={handleTextChange}></input>
         <input type="text" value={taskCategory} onChange={handleCatChange}/>

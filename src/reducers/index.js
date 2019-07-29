@@ -1,14 +1,16 @@
 import currentUserId from './currentUserId'
-import loginDetails from './loginDetails'
 import allTasks from './allTasks'
 import taskCategory from './setTaskCategory'
 import taskText from './setTaskText'
+import username from './setUsername'
+import password from './setPassword'
 import { combineReducers } from 'redux'
 
 export default combineReducers({
   currentUserId,
-  loginDetails,
   allTasks,
   taskCategory,
-  taskText
+  taskText,
+  username,
+  password
 })
