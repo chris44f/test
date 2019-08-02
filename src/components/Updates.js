@@ -1,14 +1,16 @@
 import React from 'react'
 import Update from './Update'
+import _ from 'lodash'
 
-function Updates({ userTasks }) {
+function Updates({ allTasks }) {
+
   return (
     <div>
       <h3>
-        Here are your tasks:
+        Here are your updates:
       </h3>
-      {userTasks.map(user => (
-        <Update user={user} key={user.updateId} />
+      {_.values(allTasks).map(task => (
+        <Update task={task}/>
       ))}
     </div>
   )

@@ -1,11 +1,15 @@
 import React from 'react'
 
-function Update({ user }) {
-  const { taskText, taskCategory, is_user_task } = user
+function Update({ task }) {
+
+  const { taskText, taskCategory, timestamp, user_id, key } = task
   return (
     <div>
       <p>{taskText}</p>
       <p>{taskCategory}</p>
+      <p>{user_id}</p>
+      <p>{timestamp}</p>
+      <p>{key}</p>
     </div>
   )
 }

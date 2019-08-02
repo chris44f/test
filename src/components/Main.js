@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import '../App.css';
 import LoginPage from './LoginPage'
-import uuidv from 'uuid/v4'
-import _ from 'lodash'
+import { connect } from 'react-redux'
+// import uuidv from 'uuid/v4'
+// import _ from 'lodash'
 import Home from './Home'
-import store from '../store'
-import { setTaskCategory, setTaskText, updateTask } from '../actions'
+// import { setTaskCategory, setTaskText, updateTask } from '../actions'
 
-const Main = () => {
+class Main extends Component {
 
   // state = {
     // categories: ["work1", "work2", "work3"],
@@ -50,38 +50,47 @@ const Main = () => {
   //   }
   // }
 
-    const { currentUserId, allTasks, taskCategory, taskText } = store.getState()
+    // whatToRender = () => {
+    //   if(this.props.currentUserId === "user001" || this.props.currentUserId === "user002") {
+    //     return <Home allTasks={_.values(this.props.allTasks)} currentUserId={this.props.currentUserId}/>
+    //   } else {
+    //     return <LoginPage />
+    //   }
+    // }
 
-    const whatToRender = () => {
-      if(currentUserId === "user001" || currentUserId === "user002") {
-        return <Home allTasks={_.values(allTasks)} currentUserId={currentUserId}/>
+    whatToRender = () => {
+      if(this.props.currentUserId === "user001" || this.props.currentUserId === "user002") {
+        return <Home />
       } else {
         return <LoginPage />
       }
     }
 
-    const handleCatChange = e => {
-      store.dispatch(setTaskCategory(e.target.value))
+    // handleCatChange = e => {
+    //   this.props.setTaskCategory(e)
+    // }
+
+    // handleTextChange = e => {
+    //   this.props.setTaskText(e)
+    // }
+
+    // handleSubmit = e => {
+    //   e.preventDefault()
+    //   const key = uuidv()
+    //   const timestamp = `${new Date().toLocaleDateString()}   ${new Date().toLocaleTimeString()}`
+    //   this.props.updateTask(this.props.taskText, this.props.taskCategory, this.props.currentUserId, timestamp, key)
+    // }
+
+    render(){
+      return (
+        <div>
+          {/* <button onClick={this.handleSubmit}>Click me</button>
+          <input type="text" placeholder="What did you do today?" value={this.props.taskText} onChange={this.handleTextChange}></input>
+          <input type="text" value={this.props.taskCategory} onChange={this.handleCatChange}/> */}
+          {this.whatToRender()}
+        </div>
+      )
     }
-
-    const handleTextChange = e => {
-      store.dispatch(setTaskText(e.target.value))
-    }
-
-    const handleSubmit = e => {
-      e.preventDefault()
-      store.dispatch(updateTask( taskText, taskCategory, currentUserId ))
-    }
-
-    return (
-      <div>
-        <button onClick={handleSubmit}>Click me</button>
-        <input type="text" placeholder="What did you do today?" value={taskText} onChange={handleTextChange}></input>
-        <input type="text" value={taskCategory} onChange={handleCatChange}/>
-        {whatToRender()}
-      </div>
-    )
-
   }
 
 
@@ -141,4 +150,23 @@ const Main = () => {
 //   }
 // }
 
-export default Main;
+// const mapStateToProps = state => {
+//   return {
+//     currentUserId: state.currentUserId,
+//     allTasks: state.allTasks,
+//     taskCategory: state.taskCategory,
+//     taskText: state.taskText
+//   }
+// }
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     setTaskCategory: event => dispatch(setTaskCategory(event.target.value)),
+//     setTaskText: event => dispatch(setTaskText(event.target.value)),
+//     updateTask: (text,cat,id,tstamp,key) => dispatch(updateTask(text,cat,id,tstamp,key))
+//   }
+// }
+
+// export default connect({mapStateToProps},mapDispatchToProps)(Main)
+
+export default connect(state => ({ currentUserId: state.currentUserId }))(Main)

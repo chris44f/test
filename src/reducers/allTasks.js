@@ -5,19 +5,17 @@ import _ from 'lodash'
 export default (state = allTasks, action) => {
   switch (action.type) {
     case UPDATE_TASK:
-      const { task, category, user_id } = action.payload
-      const allUserTasks = state[user_id]
-      const number = +_.keys(allUserTasks).pop() + 1
+      const { task, category, user_id, timestamp, key } = action.payload
+      const number = +_.keys(allTasks).pop() + 1
       return {
         ...state,
-        [user_id]: {
-          ...allUserTasks,
           [number]: {
             taskText: task,
             taskCategory: category,
-            is_user_task: true
+            user_id: user_id,
+            timestamp: timestamp,
+            key: key
           }
-        }
       }
     default:
       return state

@@ -20,12 +20,14 @@ export const setPassword = value => ({
   payload: value
 })
 
-export const updateTask = ( task, category, user_id ) => ({
+export const updateTask = ( task, category, user_id, timestamp, key ) => ({
   type: UPDATE_TASK,
   payload: {
     task,
     category,
-    user_id
+    user_id,
+    timestamp,
+    key
   }
 })
 

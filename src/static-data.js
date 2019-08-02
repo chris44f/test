@@ -11,28 +11,55 @@ const loginDetails = {
   }
 }
 
+// const allTasks = {
+//   user001: {
+//     0: {
+//       taskText: "first task update",
+//       taskCategory: "work1",
+//       timestamp: 'demo',
+//       user_id: "user001",
+//       key: "demo001_0"
+//     },
+//     1: {
+//       taskText: "second task update",
+//       taskCategory: "work3",
+//       timestamp: 'demo2',
+//       user_id: "user001",
+//       key: "demo001_1"
+//     }
+//   },
+//   user002: {
+//     0: {
+//       taskText: "my first update",
+//       taskCategory: "work 1",
+//       timestamp: 'demo3',
+//       user_id: "user002",
+//       key: "demo002_0"
+//     }
+//   } 
+// }
+
 const allTasks = {
-  user001: {
-    0: {
+  1: {
       taskText: "first task update",
       taskCategory: "work1",
-      is_user_task: true,
-      updateId: "001_0"
-    },
-    1: {
+      timestamp: 'demo',
+      user_id: "user001",
+      key: "demo001_0"
+  },
+  2: {
       taskText: "second task update",
       taskCategory: "work3",
-      is_user_task: true,
-      updateId: "001_1"
-    }
+      timestamp: 'demo2',
+      user_id: "user001",
+      key: "demo001_1"
   },
-  user002: {
-    0: {
+  3: {
       taskText: "my first update",
       taskCategory: "work 1",
-      is_user_task: true,
-      updateId: "002_0"
-    }
+      timestamp: 'demo3',
+      user_id: "user002",
+      key: "demo002_0"
   } 
 }
 
