@@ -1,4 +1,12 @@
-import { SET_TASK_CATEGORY, SET_TASK_TEXT, UPDATE_TASK, SET_USERNAME, SET_PASSWORD, USER_VERIFICATION } from '../constants/action-types'
+import {
+  SET_TASK_CATEGORY,
+  SET_TASK_TEXT,
+  UPDATE_TASK,
+  SET_USERNAME,
+  SET_PASSWORD,
+  USER_VERIFICATION,
+  UPDATE_CATEGORIES
+} from '../constants/action-types'
 
 export const setTaskCategory = value => ({
   type: SET_TASK_CATEGORY,
@@ -33,5 +41,10 @@ export const updateTask = ( task, category, user_id, timestamp, key ) => ({
 
 export const userVerification = value => ({
   type: USER_VERIFICATION,
+  payload: value
+})
+
+export const updateCategories = value => ({
+  type: UPDATE_CATEGORIES,
   payload: value
 })

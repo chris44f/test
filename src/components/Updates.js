@@ -2,7 +2,7 @@ import React from 'react'
 import Update from './Update'
 import _ from 'lodash'
 
-function Updates({ allTasks }) {
+const Updates = ({ allTasks }) => {
 
   return (
     <div>

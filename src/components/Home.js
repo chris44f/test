@@ -1,66 +1,61 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Header from './Header'
+import NewUpdate from './NewUpdate'
 import Updates from './Updates'
+import Filters from './Filters'
 import _ from 'lodash'
-import uuidv from 'uuid/v4'
-import { setTaskCategory, setTaskText, updateTask } from '../actions'
 
 class Home extends Component {
 
-  handleSubmit = e => {
-    e.preventDefault()
-    const key = uuidv()
-    const timestamp = `${new Date().toLocaleDateString()}   ${new Date().toLocaleTimeString()}`
-    this.props.updateTask(this.props.taskText, this.props.taskCategory, this.props.currentUserId, timestamp, key)
+  state = {
+    filtersOn: [],
+    filteredTasks: _.values(this.props.allTasks)
   }
 
-  handleCatChange = e => {
-    this.props.setTaskCategory(e)
+  addFilter = filter => {
+    if(!this.state.filtersOn.includes(filter)){
+      let newFilters = [...this.state.filtersOn]
+      newFilters = newFilters.concat(filter)
+      this.setState({filtersOn: newFilters})
+    } else {
+      let newFilters = [...this.state.filtersOn]
+      newFilters = newFilters.filter(filters => filters !== filter)
+      this.setState({filtersOn: newFilters})
+    }
+    this.applyFilters()
   }
 
-  handleTextChange = e => {
-    this.props.setTaskText(e)
+  applyFilters = () => {
+    if(this.state.filtersOn.length > 0) {
+      let fltrdTasks = [...this.state.filteredTasks]
+      const fltrs = this.state.filtersOn
+      fltrdTasks = fltrdTasks.filter(task => {
+        fltrs.includes(task.user_id) || fltrs.includes(task.taskCategory)
+      })
+      this.setState({ filteredTasks: fltrdTasks })
+    } else { this.setState({ filteredTasks: _.values(this.props.allTasks)})}
   }
 
   render(){
-
-    console.log(this.props)
-
-    return (
-      <div>
-        <Header user={this.props.currentUserId}/>
-          <input type="text" placeholder="What did you do today?" value={this.props.taskText} onChange={this.handleTextChange}></input>
-          <input type="text" value={this.props.taskCategory} onChange={this.handleCatChange}/>
-          <button onClick={this.handleSubmit}>Submit Update</button>
-        <Updates allTasks={_.values(this.props.allTasks)}></Updates>
-      </div>
-    )
-  }
+    console.log(this.state.filtersOn)
+  return (
+    <div>
+      <Header user={this.props.currentUserId}/>
+      <NewUpdate />
+      <Filters handleFilter={this.addFilter}/>
+      <Updates allTasks={this.state.filteredTasks}/>
+      {/* <Updates allTasks={_.values(this.props.allTasks)}></Updates> */}
+    </div>
+  )
 }
-
-// const mapStateToProps = state => {
-//   return{
-//     allTasks: state.allTasks,
-//     currentUserId: state.currentUserId
-//   }
-// }
+}
 
 const mapStateToProps = state => {
   return {
     currentUserId: state.currentUserId,
     allTasks: state.allTasks,
-    taskCategory: state.taskCategory,
-    taskText: state.taskText
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setTaskCategory: event => dispatch(setTaskCategory(event.target.value)),
-    setTaskText: event => dispatch(setTaskText(event.target.value)),
-    updateTask: (text,cat,id,tstamp,key) => dispatch(updateTask(text,cat,id,tstamp,key))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps)(Home)

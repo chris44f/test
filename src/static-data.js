@@ -8,6 +8,11 @@ const loginDetails = {
     username: "guest2",
     password: "secR3t2",
     user_id: "user002"
+  },
+  admin: {
+    username: "admin",
+    password: "1",
+    user_id: "admin"
   }
 }
 
@@ -40,27 +45,31 @@ const loginDetails = {
 // }
 
 const allTasks = {
-  1: {
+  0: {
       taskText: "first task update",
       taskCategory: "work1",
       timestamp: 'demo',
       user_id: "user001",
       key: "demo001_0"
   },
-  2: {
+  1: {
       taskText: "second task update",
       taskCategory: "work3",
       timestamp: 'demo2',
       user_id: "user001",
       key: "demo001_1"
   },
-  3: {
+  2: {
       taskText: "my first update",
-      taskCategory: "work 1",
+      taskCategory: "work1",
       timestamp: 'demo3',
       user_id: "user002",
       key: "demo002_0"
   } 
 }
 
-export { loginDetails, allTasks }
+const allCats = [
+  "work1", "work2", "work3"
+]
+
+export { loginDetails, allTasks, allCats }
