@@ -1,17 +1,20 @@
 import React from 'react'
 import Update from './Update'
 import _ from 'lodash'
+import Typography from '@material-ui/core/Typography'
 
 const Updates = ({ allTasks }) => {
 
   return (
     <div>
-      <h3>
+      <Typography variant='h4'>
         Here are your updates:
-      </h3>
+      </Typography>
+      <ul>
       {_.values(allTasks).map(task => (
         <Update task={task}/>
       ))}
+      </ul>
     </div>
   )
 }

@@ -1,11 +1,11 @@
 const loginDetails = {
   user001: {
-      username: "guest1",
+      username: "Chris",
       password: "s3cRet1",
       user_id: "user001"
     },
   user002: {
-    username: "guest2",
+    username: "Ebony",
     password: "secR3t2",
     user_id: "user002"
   },

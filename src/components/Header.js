@@ -1,10 +1,12 @@
 import React from 'react'
+import Typography from '@material-ui/core/Typography'
+import { loginDetails } from '../static-data'
 
 function Header({ user }) {
   return (
-    <header>
-      <h1>{`Welcome back ${user}`}</h1>
-    </header>
+    <div>
+      <Typography variant='h3'>{`Welcome back ${loginDetails[user].username}`}</Typography>
+    </div>
   )
 }
 

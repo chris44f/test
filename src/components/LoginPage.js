@@ -2,10 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { setUsername, setPassword, userVerification } from '../actions'
 import { loginDetails } from '../static-data'
+import TextField from '@material-ui/core/TextField'
+import IconButton from '@material-ui/core/IconButton'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import Box from '@material-ui/core/Box'
+
 
 const { user001, user002, admin } = loginDetails
 
 class LoginPage extends Component {
+
+  state = {
+    showPassword: false
+  }
+
+  showPassword = () => {
+    this.setState({ showPassword: !this.state.showPassword })
+  }
 
   handleLoginSubmit = e => {
     e.preventDefault()
@@ -28,13 +45,37 @@ class LoginPage extends Component {
 
   render(){
   return(
-    <div>
-      <h2>Welcome!</h2>
-      <h5>Please log in..</h5>
-      <input type="text" placeholder="Enter Username" value={this.props.username} onChange={this.handleUsernameChange}></input>
-      <input type="password" placeholder="Enter Password" value={this.props.password} onChange={this.handlePasswordChange}></input>
-      <button onClick={this.handleLoginSubmit}>Log In</button>
-    </div>
+    <Box component='main'>
+      <Typography variant='h4'>Welcome!</Typography>
+      <Typography variant='h6'>Please log in..</Typography>
+      <TextField
+        variant="outlined"
+        type="text"
+        label="Username"
+        value={this.props.username} 
+        onChange={this.handleUsernameChange}
+        />
+      <TextField
+        variant="outlined"
+        type={this.state.showPassword ? 'text' : 'password'}
+        label="Password"
+        value={this.props.password}
+        onChange={this.handlePasswordChange}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                edge="end"
+                onClick={this.showPassword}
+              >
+                {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
+      />
+      <Button onClick={this.handleLoginSubmit} variant="contained" color="primary">Log In</Button>
+    </Box>
   )
   }
 }
