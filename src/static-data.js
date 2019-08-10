@@ -47,22 +47,25 @@ const loginDetails = {
 const allTasks = {
   0: {
       taskText: "first task update",
-      taskCategory: "work1",
-      timestamp: 'demo',
+      taskCategory: ["work1"],
+      timestamp: '12:00:00',
+      datestamp: '01/02/2019',
       user_id: "user001",
       key: "demo001_0"
   },
   1: {
       taskText: "second task update",
-      taskCategory: "work3",
-      timestamp: 'demo2',
+      taskCategory: ["work3"],
+      timestamp: '15:30:30',
+      datestamp: '05/04/2019',
       user_id: "user001",
       key: "demo001_1"
   },
   2: {
       taskText: "my first update",
-      taskCategory: "work1",
-      timestamp: 'demo3',
+      taskCategory: ["work1"],
+      datestamp: '05/04/2019',
+      timestamp: '07:08:19',
       user_id: "user002",
       key: "demo002_0"
   } 

@@ -21,17 +21,8 @@ import AddCircleOutline from '@material-ui/icons/AddCircleOutlineRounded'
 class NewUpdate extends Component {
 
   state = {
-    catBoxOpen: false,
     dialogCategories: [],
     newCat: ""
-  }
-
-  handleClickCategory = () => {
-    this.setState({ catBoxOpen: true })
-  }
-
-  handleCancel = () => {
-    this.setState({ catBoxOpen: false, dialogCategories: [] })
   }
 
   handleCatAdd = cat => {  
@@ -42,45 +33,59 @@ class NewUpdate extends Component {
     this.setState({ newCat: newcat })
   }
 
-// this doesnt quite work yet, new cat only added if pop up is opened again
-
-  handleClose = () => {
-    if (this.state.newCat!=="") {
-      let additionalCat = this.state.dialogCategories
-      additionalCat = additionalCat.concat(this.state.newCat)
-      this.setState({
-        dialogCategories: additionalCat,
-        catBoxOpen: false
-      })
-      this.handleCatChange()
-    } else {
-    this.setState({ catBoxOpen: false })
-    this.handleCatChange()
-    }
-  }
-
-  // handleClose = () => {
-  //   this.setState({ catBoxOpen: false })
-  //   this.handleCatChange(this.state.dialogCategories)
-  // }
-  
-  handleSubmit = e => {
-    e.preventDefault()
-    const key = uuidv()
-    const timestamp = `${new Date().toLocaleDateString()}   ${new Date().toLocaleTimeString()}`
-    this.props.updateTask(this.props.taskText, this.props.taskCategory, this.props.currentUserId, timestamp, key)
-    if( this.state.newCat!=="" && !this.props.allCats.includes(this.state.newCat)){
-      this.props.updateCategories(this.state.newCat)
-    }
-  }
-
-  handleCatChange = () => {
-    this.props.setTaskCategory(this.state.dialogCategories)
-  }
-
   handleTextChange = e => {
     this.props.setTaskText(e)
   }
+
+  handleCancel = () => {
+    this.setState({ dialogCategories: [], newCat: "" })
+    this.props.closeDialog()
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+    const key = uuidv()
+    const dateStamp = `${new Date().toLocaleDateString()}`
+    const timeStamp = `${new Date().toLocaleTimeString()}`
+    if (this.state.newCat!=="") {
+      let additionalCat = this.state.dialogCategories
+      additionalCat = additionalCat.concat(this.state.newCat)
+      this.setState({ dialogCategories: additionalCat })
+      this.props.updateTask(this.props.taskText, additionalCat, this.props.currentUserId, dateStamp, timeStamp, key)
+      this.props.updateCategories(this.state.newCat)
+      this.props.closeDialog()
+    } else { 
+      this.props.updateTask(this.props.taskText, this.state.dialogCategories, this.props.currentUserId, dateStamp, timeStamp, key)
+      this.props.closeDialog()
+    }
+  }
+
+
+
+  // handleClose = () => {
+  //   if (this.state.newCat!=="") {
+  //     let additionalCat = this.state.dialogCategories
+  //     additionalCat = additionalCat.concat(this.state.newCat)
+  //     this.setState({
+  //       dialogCategories: additionalCat,
+  //     })
+  //   } else { this.handleCatChange()}
+  // }
+
+  // handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   const key = uuidv()
+  //   const timestamp = `${new Date().toLocaleDateString()}   ${new Date().toLocaleTimeString()}`
+  //   this.props.updateTask(this.props.taskText, this.props.taskCategory, this.props.currentUserId, timestamp, key)
+  //   if( this.state.newCat!=="" && !this.props.allCats.includes(this.state.newCat)){
+  //     this.props.updateCategories(this.state.newCat)
+  //     this.props.closeDialog()
+  //   } else { this.props.closeDialog() }
+  // }
+
+  // handleCatChange = () => {
+  //   this.props.setTaskCategory(this.state.dialogCategories)
+  // }
 
   render(){
     return(
@@ -118,19 +123,17 @@ class NewUpdate extends Component {
         <FormControl margin='normal'>
           <TextField placeholder="Add new category?" value={this.state.newCat} onChange={(e)=>this.handleNewCat(e.target.value)}></TextField>
         </FormControl>
-        {/* <Button onClick={this.handleCancel}>Cancel</Button>
-        <Button onClick={this.handleClose}>Add</Button> */}
         {this.state.dialogCategories.map(cat => {
           return(
             <Chip label={cat}/>
           )
         })}
       <DialogActions>
-        <Button variant='contained' onClick={this.handleSubmit}>
+        <Button variant='contained' onClick={this.handleCancel}>
           Cancel
           <Clear />
         </Button>
-        <Button variant='contained' onClick={this.handleSubmit}>
+        <Button variant='contained' onClick={(e)=>this.handleSubmit(e)}>
           Submit Update
           <AddCircleOutline />
         </Button>
@@ -138,6 +141,7 @@ class NewUpdate extends Component {
       </DialogContent>
     )
   }
+
 }
 
 const mapStateToProps = state => {
@@ -153,7 +157,7 @@ const mapDispatchToProps = dispatch => {
   return {
     setTaskCategory: taskCat => dispatch(setTaskCategory(taskCat)),
     setTaskText: event => dispatch(setTaskText(event.target.value)),
-    updateTask: (text,cat,id,tstamp,key) => dispatch(updateTask(text,cat,id,tstamp,key)),
+    updateTask: (text,cat,id,dstamp,tstamp,key) => dispatch(updateTask(text,cat,id,dstamp,tstamp,key)),
     updateCategories: cat => dispatch(updateCategories(cat))
   }
 }

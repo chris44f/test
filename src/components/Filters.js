@@ -21,7 +21,7 @@ class Filters extends Component {
             {_.values(loginDetails).map(user => (
                 <ListItem>
                   <ListItemText primary={user.username} />
-                  <Checkbox checked={this.props.filtersOn.includes(user.user_id)} onClick={()=>this.props.handleFilter(user.user_id)}/>
+                  <Checkbox checked={this.props.userFiltersOn.includes(user.user_id)} onClick={()=>this.props.handleUserFilter(user.user_id)}/>
                 </ListItem>
             ))}
           <Divider />
@@ -29,7 +29,7 @@ class Filters extends Component {
             {this.props.allCats.map(cat => (
                 <ListItem>
                   <ListItemText primary={cat} />
-                  <Checkbox checked={this.props.filtersOn.includes(cat)} onClick={()=>this.props.handleFilter(cat)}/>
+                  <Checkbox checked={this.props.catFiltersOn.includes(cat)} onClick={()=>this.props.handleCatFilter(cat)}/>
                 </ListItem>
             ))}
         </List>

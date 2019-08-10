@@ -4,10 +4,12 @@ import Chip from '@material-ui/core/Chip'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Avatar from '@material-ui/core/Avatar'
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
 
-const Update = ({ task }) => {
+const Update = ({ task, removeTask }) => {
 
-  const { taskText, taskCategory, timestamp, user_id } = task
+  const { taskText, taskCategory, user_id, datestamp, timestamp, key } = task
 
   const findAvatar = (id) => {
     return loginDetails[id.user_id].username.charAt(0)
@@ -19,11 +21,18 @@ const Update = ({ task }) => {
     } else { return (<Chip variant='outlined' color='primary' label={taskCategory}/>)}
   }
 
+  const renderDelete = () => {
+    if(task.user_id === "admin") {
+      return (<IconButton onClick={()=>removeTask({key})}><DeleteIcon /></IconButton>)
+    }
+  }
+
   return (
     <ListItem alignitems='flex-start' divider>
       <Avatar>{findAvatar({user_id})}</Avatar>
-      <ListItemText primary={taskText} secondary={timestamp} />
+      <ListItemText primary={taskText} secondary={`Updated at ${timestamp} on ${datestamp}`}/>
       {renderCategory()}
+      {renderDelete()}
     </ListItem>
   )
 }

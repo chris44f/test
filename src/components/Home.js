@@ -1,99 +1,84 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { setUsername, setPassword, userVerification } from '../actions'
 import Header from './Header'
 import Button from '@material-ui/core/Button'
 import NewUpdate from './NewUpdate'
 import Updates from './Updates'
-import Filters from './Filters'
-import _ from 'lodash'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Slide from '@material-ui/core/Slide'
-import Drawer from '@material-ui/core/Drawer'
 import Create from '@material-ui/icons/Create'
+import CheckCircleIcon from '@material-ui/icons/CheckCircle'
+import Snackbar from '@material-ui/core/Snackbar'
 
 class Home extends Component {
 
   state = {
-    filtersOn: [],
-    filteredTasks: _.values(this.props.allTasks),
     showUpdate: false,
-    showFilterDrawer: false,
+    showSnackbar: true
   }
 
-  showFilters = () => {
-    this.setState({ showFilterDrawer: !this.state.showFilterDrawer })
-  }
-
-  dialogTransition = () => {
-    return <Slide direction='up' />
-  }
+  Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  })
 
   handleUpdate = () => {
     this.setState({ showUpdate: !this.state.showUpdate})
   }
 
-  addFilter = filter => {
-    if(!this.state.filtersOn.includes(filter)){
-      let newFilters = [...this.state.filtersOn]
-      newFilters = newFilters.concat(filter)
-      this.setState({filtersOn: newFilters})
-    } else {
-      let newFilters = [...this.state.filtersOn]
-      newFilters = newFilters.filter(filters => filters !== filter)
-      this.setState({filtersOn: newFilters})
-    }
-    this.applyFilters()
-  }
-
-  applyFilters = () => {
-    let fltrdTsks = [..._.values(this.props.allTasks)]
-    // let fltrs = this.state.filtersOn
-    // fltrs.forEach(fltr => {
-    //   fltrdTsks = fltrdTsks.filter(val => {
-    //     return val.taskCategory===fltr || val.user_id===fltr
-    //   })
-    // })
-    // if(this.state.filtersOn.length===0){
-    // } else {this.setState({ filteredTasks: fltrdTsks })}
-    const fltrs = [...this.state.filtersOn]
-    fltrdTsks = fltrdTsks.filter( val => fltrs.includes(val.taskCategory))
-    this.setState({ filteredTasks: fltrdTsks })
+  logOut = () => {
+    this.props.setUsername()
+    this.props.setPassword()
+    this.props.userVerification()
   }
 
   render(){
-  return (
-    <div>
-      <Header user={this.props.currentUserId}/>
-      <Button 
-        variant="contained"
-        color="primary"
-        onClick={this.handleUpdate}
-      >
-        Add an update
-        <Create />
-      </Button>
-        <Dialog onClose={this.handleUpdate} open={this.state.showUpdate}>
-          <DialogTitle>Add an update</DialogTitle>
-          <NewUpdate />
-        </Dialog>
-        {/* should Drawer and Filters actually be rendered in Updates? */}
-        <Button onClick={this.showFilters}>Apply Filters</Button>
-      <Drawer open={this.state.showFilterDrawer} onClose={this.showFilters}>
-        <Filters handleFilter={this.addFilter} filtersOn={this.state.filtersOn}/>
-      </Drawer>
-      <Updates allTasks={ this.state.filtersOn.length>0 ? this.state.filteredTasks : _.values(this.props.allTasks)}/>
-      {/* for some reason, adding tasks only show if rendering this.props one */}
-    </div>
-  )
-}
-}
-
-const mapStateToProps = state => {
-  return {
-    currentUserId: state.currentUserId,
-    allTasks: state.allTasks,
+    return (
+      <div> 
+        <Header user={this.props.currentUserId}/>
+        <Button 
+          variant="contained"
+          color="primary"
+          onClick={this.handleUpdate}
+        >
+          Add an update
+          <Create />
+        </Button>
+          <Dialog
+            onClose={this.handleUpdate}
+            open={this.state.showUpdate}
+            TransitionComponent={this.Transition}
+            maxWidth="md"
+            fullWidth
+          >
+            <DialogTitle>Add an update</DialogTitle>
+            <NewUpdate closeDialog={this.handleUpdate}/>
+          </Dialog>
+          <Updates />
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            open={this.state.showSnackbar}
+            autoHideDuration={3000}
+            onClose={this.handleClose}
+            message={<span>Update added!</span>}
+            action={<CheckCircleIcon />}
+          />
+          <Button color="secondary" variant="outlined" onClick={()=>this.logOut("")}>Log Out</Button>
+      </div>
+    )
   }
 }
 
-export default connect(mapStateToProps)(Home)
+const mapDispatchToProps = dispatch => {
+  return {
+    userVerification: () => dispatch(userVerification("")),
+    setUsername: () => dispatch(setUsername("")),
+    setPassword: () => dispatch(setPassword(""))
+  }
+}
+
+export default connect(state => ({ currentUserId: state.currentUserId }), mapDispatchToProps)(Home)
