@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import Groups from './Groups'
 import _ from 'lodash'
 import Typography from '@material-ui/core/Typography'
+import './updates.css'
 import Button from '@material-ui/core/Button'
-import Box from '@material-ui/core/Box'
+import FilterList from '@material-ui/icons/FilterList'
 import Drawer from '@material-ui/core/Drawer'
 import Container from '@material-ui/core/Container'
 import Filters from './Filters'
@@ -184,14 +185,16 @@ class Updates extends Component {
   render(){
     return (
       <div>
-        <Typography variant='h4' color="primary">
-          Here are your updates:
-        </Typography>
+        <div className='updates-header-container'>
+          <h2>
+            Here are your updates:
+          </h2>
+          <Button onClick={this.showFilters} color="primary" variant="outlined">Filters
+            <FilterList />
+          </Button>
+          </div>
         <Container>
           {this.newRenderUpdates()}
-        <Box>
-         <Button onClick={this.showFilters} color="primary" variant="outlined">Apply Filters</Button>
-        </Box>
         <Drawer open={this.state.showFilterDrawer} onClose={this.showFilters}>
           <Filters handleUserFilter={this.userFilter} 
           handleCatFilter={this.catFilterNew}

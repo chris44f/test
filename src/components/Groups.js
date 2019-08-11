@@ -1,5 +1,8 @@
 import React from 'react'
 import Update from './Update'
+import './group.css'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
 
 const Groups = ( props ) => {
 
@@ -9,6 +12,7 @@ const Groups = ( props ) => {
     props.tasks.map(task => {
       if (!days.includes(task.datestamp)) {
         days.push(task.datestamp)
+        return days.sort((a,b) => (new Date(b) - new Date(a)))
       }
     })
   }
@@ -21,9 +25,10 @@ const Groups = ( props ) => {
         let group = props.tasks.filter(task => task.datestamp===date)
         return(
           <div>
-            <ul>
-              {date}
-              {group.map(task => (<Update task={task} removeTask={props.removeTask} />))}
+            <ul className='list-group'>
+              <Typography variant='h5' color='primary' align='center'>{date}</Typography>
+              {group.map(task => (<Update task={task} removeTask={props.removeTask}/>))}
+              <Divider/>
             </ul>
           </div>
         )

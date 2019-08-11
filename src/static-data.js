@@ -16,34 +16,6 @@ const loginDetails = {
   }
 }
 
-// const allTasks = {
-//   user001: {
-//     0: {
-//       taskText: "first task update",
-//       taskCategory: "work1",
-//       timestamp: 'demo',
-//       user_id: "user001",
-//       key: "demo001_0"
-//     },
-//     1: {
-//       taskText: "second task update",
-//       taskCategory: "work3",
-//       timestamp: 'demo2',
-//       user_id: "user001",
-//       key: "demo001_1"
-//     }
-//   },
-//   user002: {
-//     0: {
-//       taskText: "my first update",
-//       taskCategory: "work 1",
-//       timestamp: 'demo3',
-//       user_id: "user002",
-//       key: "demo002_0"
-//     }
-//   } 
-// }
-
 const allTasks = {
   0: {
       taskText: "first task update",
@@ -54,7 +26,7 @@ const allTasks = {
       key: "demo001_0"
   },
   1: {
-      taskText: "second task update",
+      taskText: "Second Task Update",
       taskCategory: ["work3"],
       timestamp: '15:30:30',
       datestamp: '05/04/2019',

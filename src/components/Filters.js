@@ -15,9 +15,13 @@ class Filters extends Component {
   render(){
     return(
       <aside>
-        <List component='ul' dense>
-          <Typography variant='h6'>Apply Filters</Typography>
-          <ListSubHeader component='ul'>By user</ListSubHeader>
+        <List component='ul'>
+          <Typography variant='h6' color='primary'>Apply Filters</Typography>
+          <ListSubHeader component='ul'>
+            <Typography variant='subtitle1' color='secondary'>
+              By user
+            </Typography>
+          </ListSubHeader>
             {_.values(loginDetails).map(user => (
                 <ListItem>
                   <ListItemText primary={user.username} />
@@ -25,7 +29,11 @@ class Filters extends Component {
                 </ListItem>
             ))}
           <Divider />
-          <ListSubHeader>By category</ListSubHeader>
+          <ListSubHeader>
+            <Typography variant='subtitle1' color='secondary'>
+                By tag
+            </Typography>
+          </ListSubHeader>
             {this.props.allCats.map(cat => (
                 <ListItem>
                   <ListItemText primary={cat} />

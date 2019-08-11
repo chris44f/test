@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Yellowtail';
+  src: url(https://fonts.gstatic.com/s/yellowtail/v10/OZpGg_pnoDtINPfRIlLohlvHwWL9f4k.woff2)
+}
+
+.updates-header-container h2 {
+  font-family: 'Yellowtail', cursive;
+  color: #00bcd4;
+  font-size: 3em
+}
+
+.updates-header-container {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 5%;
+  padding-right: 5%
+}

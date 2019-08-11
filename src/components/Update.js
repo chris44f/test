@@ -5,6 +5,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
+import Divider from '@material-ui/core/Divider'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 const Update = ({ task, removeTask }) => {
@@ -17,8 +18,8 @@ const Update = ({ task, removeTask }) => {
 
   const renderCategory = () => {
     if(typeof taskCategory !== 'string'){
-      return (taskCategory.map(cat=>(<Chip label={cat} variant='outlined' color='primary'/>)))
-    } else { return (<Chip variant='outlined' color='primary' label={taskCategory}/>)}
+      return (taskCategory.map(cat=>(<Chip label={cat} color='primary'/>)))
+    } else { return (<Chip color='primary' label={taskCategory}/>)}
   }
 
   const renderDelete = () => {
@@ -28,7 +29,7 @@ const Update = ({ task, removeTask }) => {
   }
 
   return (
-    <ListItem alignitems='flex-start' divider>
+    <ListItem alignitems='flex-start' divider={<Divider component='li' light />}>
       <Avatar>{findAvatar({user_id})}</Avatar>
       <ListItemText primary={taskText} secondary={`Updated at ${timestamp} on ${datestamp}`}/>
       {renderCategory()}

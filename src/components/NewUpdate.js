@@ -60,42 +60,15 @@ class NewUpdate extends Component {
     }
   }
 
-
-
-  // handleClose = () => {
-  //   if (this.state.newCat!=="") {
-  //     let additionalCat = this.state.dialogCategories
-  //     additionalCat = additionalCat.concat(this.state.newCat)
-  //     this.setState({
-  //       dialogCategories: additionalCat,
-  //     })
-  //   } else { this.handleCatChange()}
-  // }
-
-  // handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   const key = uuidv()
-  //   const timestamp = `${new Date().toLocaleDateString()}   ${new Date().toLocaleTimeString()}`
-  //   this.props.updateTask(this.props.taskText, this.props.taskCategory, this.props.currentUserId, timestamp, key)
-  //   if( this.state.newCat!=="" && !this.props.allCats.includes(this.state.newCat)){
-  //     this.props.updateCategories(this.state.newCat)
-  //     this.props.closeDialog()
-  //   } else { this.props.closeDialog() }
-  // }
-
-  // handleCatChange = () => {
-  //   this.props.setTaskCategory(this.state.dialogCategories)
-  // }
-
   render(){
     return(
       <DialogContent>
-        <FormControl required margin='normal'>
-          <TextField placeholder="What did you do today?" value={this.props.taskText} onChange={this.handleTextChange}></TextField>
+        <FormControl required margin='normal' fullWidth>
+          <TextField placeholder="What did you do today?" value={this.props.taskText} onChange={this.handleTextChange} variant='outlined'></TextField>
         </FormControl>
         <br />
-        <FormControl required margin='normal'>
-          <InputLabel>Add Tags</InputLabel>
+        <FormControl required margin='normal' fullWidth>
+          <InputLabel>Add tags to update</InputLabel>
           <Select
             multiple
             value={this.state.dialogCategories} 
@@ -103,7 +76,7 @@ class NewUpdate extends Component {
             input={<Input />}
             renderValue={ selected => (
               selected.map(value => (
-                <Chip label={value} />
+                <Chip color='secondary' variant='outlined' label={value} />
               ))
             )}
           >
@@ -117,23 +90,20 @@ class NewUpdate extends Component {
             })} 
           </Select>
         </FormControl>
-        <DialogContentText>
-          Do you want to add a new category?
-        </DialogContentText>
-        <FormControl margin='normal'>
-          <TextField placeholder="Add new category?" value={this.state.newCat} onChange={(e)=>this.handleNewCat(e.target.value)}></TextField>
+        <FormControl margin='normal' fullWidth>
+          <TextField placeholder="Want to add a different tag?" value={this.state.newCat} onChange={(e)=>this.handleNewCat(e.target.value)}></TextField>
         </FormControl>
-        {this.state.dialogCategories.map(cat => {
+        {/* {this.state.dialogCategories.map(cat => {
           return(
             <Chip label={cat}/>
           )
-        })}
+        })} */}
       <DialogActions>
-        <Button variant='contained' onClick={this.handleCancel}>
+        <Button variant='contained' color='secondary' onClick={this.handleCancel}>
           Cancel
           <Clear />
         </Button>
-        <Button variant='contained' onClick={(e)=>this.handleSubmit(e)}>
+        <Button variant='contained' color='primary' onClick={(e)=>this.handleSubmit(e)}>
           Submit Update
           <AddCircleOutline />
         </Button>

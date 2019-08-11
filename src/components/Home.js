@@ -11,7 +11,7 @@ import Slide from '@material-ui/core/Slide'
 import CreateOutlined from '@material-ui/icons/CreateOutlined'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import Snackbar from '@material-ui/core/Snackbar'
-import Box from '@material-ui/core/Box'
+import Typography from '@material-ui/core/Typography'
 
 class Home extends Component {
 
@@ -47,11 +47,12 @@ class Home extends Component {
     return (
     <div>
         <Header user={this.props.currentUserId} logOut={this.logOut}/>
-        <br />
         <Button
           variant="contained"
           color="primary"
           onClick={this.handleDialog}
+          fullWidth
+          size="large"
         >
           Add an update
           <CreateOutlined/>
@@ -63,9 +64,14 @@ class Home extends Component {
             maxWidth="md"
             fullWidth
           >
-            <DialogTitle>Add an update</DialogTitle>
+            <DialogTitle>
+              <Typography color='secondary' variant='h5' align='center'>
+                Add an update
+              </Typography>
+            </DialogTitle>
             <NewUpdate closeDialog={this.handleUpdate} cancelDialog={this.handleDialog}/>
           </Dialog>
+          <br />
           <br />
           <Updates />
           <Snackbar
