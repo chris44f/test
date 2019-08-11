@@ -39,7 +39,7 @@ class NewUpdate extends Component {
 
   handleCancel = () => {
     this.setState({ dialogCategories: [], newCat: "" })
-    this.props.closeDialog()
+    this.props.cancelDialog()
   }
 
   handleSubmit = e => {

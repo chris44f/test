@@ -1,0 +1,19 @@
+.header-container {
+  padding: 2%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #00bcd4;
+  background: linear-gradient(#e0e0e0, #ffffff);
+}
+
+@font-face {
+    font-family: 'Yellowtail';
+    src: url(https://fonts.gstatic.com/s/yellowtail/v10/OZpGg_pnoDtINPfRIlLohlvHwWL9f4k.woff2)
+}
+
+.header-text {
+  font-family: 'Yellowtail', cursive;
+  font-size: 10vh;
+  margin: 0%;
+  color: #e91e63
+}

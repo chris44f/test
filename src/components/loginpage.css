@@ -1,0 +1,18 @@
+.login-box {
+  background-color: #eaeaea;
+  border: 1px solid #e91e63;
+  border-radius: 5%;
+  text-align: center;
+  padding: 5%;
+  margin-top: 20vh
+}
+
+@font-face {
+  font-family: 'Yellowtail';
+  src: url(https://fonts.gstatic.com/s/yellowtail/v10/OZpGg_pnoDtINPfRIlLohlvHwWL9f4k.woff2)
+}
+
+.welcome-text {
+  font-family: 'Yellowtail', cursive;
+  color: #00bcd4;
+}

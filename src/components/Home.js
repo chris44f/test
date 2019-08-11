@@ -8,15 +8,16 @@ import Updates from './Updates'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Slide from '@material-ui/core/Slide'
-import Create from '@material-ui/icons/Create'
+import CreateOutlined from '@material-ui/icons/CreateOutlined'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import Snackbar from '@material-ui/core/Snackbar'
+import Box from '@material-ui/core/Box'
 
 class Home extends Component {
 
   state = {
     showUpdate: false,
-    showSnackbar: true
+    showSnackbar: false
   }
 
   Transition = React.forwardRef(function Transition(props, ref) {
@@ -24,6 +25,14 @@ class Home extends Component {
   })
 
   handleUpdate = () => {
+    this.setState({ showUpdate: !this.state.showUpdate, showSnackbar: !this.state.showSnackbar})
+  }
+
+  handleClose = () => {
+    this.setState({ showSnackbar: false})
+  }
+
+  handleDialog = () => {
     this.setState({ showUpdate: !this.state.showUpdate})
   }
 
@@ -34,27 +43,30 @@ class Home extends Component {
   }
 
   render(){
+
     return (
-      <div> 
-        <Header user={this.props.currentUserId}/>
-        <Button 
+    <div>
+        <Header user={this.props.currentUserId} logOut={this.logOut}/>
+        <br />
+        <Button
           variant="contained"
           color="primary"
-          onClick={this.handleUpdate}
+          onClick={this.handleDialog}
         >
           Add an update
-          <Create />
+          <CreateOutlined/>
         </Button>
           <Dialog
-            onClose={this.handleUpdate}
+            onClose={this.handleDialog}
             open={this.state.showUpdate}
             TransitionComponent={this.Transition}
             maxWidth="md"
             fullWidth
           >
             <DialogTitle>Add an update</DialogTitle>
-            <NewUpdate closeDialog={this.handleUpdate}/>
+            <NewUpdate closeDialog={this.handleUpdate} cancelDialog={this.handleDialog}/>
           </Dialog>
+          <br />
           <Updates />
           <Snackbar
             anchorOrigin={{
@@ -67,7 +79,6 @@ class Home extends Component {
             message={<span>Update added!</span>}
             action={<CheckCircleIcon />}
           />
-          <Button color="secondary" variant="outlined" onClick={()=>this.logOut("")}>Log Out</Button>
       </div>
     )
   }
